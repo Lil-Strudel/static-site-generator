@@ -1,0 +1,157 @@
+import { S3Client, PutBucketPolicyCommand, PutObjectCommand, ListBucketsCommand, CreateBucketCommand, Bucket, BucketLocationConstraint, ObjectOwnership, PutBucketWebsiteCommand } from "@aws-sdk/client-s3";
+import * as fs from "fs";
+import * as path from "path";
+import mime from 'mime';
+
+
+const region = process.env.REGION  || "us-west-2"
+
+const client = new S3Client({
+    region: region,
+    credentials: {
+        secretAccessKey: process.env.SECRET_ACCESS_KEY || "",
+        accessKeyId: process.env.ACCESS_KEY || ""
+    },
+}
+);
+
+
+async function uploadFolderToS3(folderPath: string, bucketName: string, prefix: string = "") {
+  const items = fs.readdirSync(folderPath); 
+
+  for (const item of items) {
+    const fullPath = path.join(folderPath, item);  
+    const s3Key = path.join(prefix, item).replace(/\\/g, '/'); 
+
+    if (fs.statSync(fullPath).isDirectory()) {
+      await uploadFolderToS3(fullPath, bucketName, s3Key);
+    } else {
+      const fileContent = fs.readFileSync(fullPath); 
+      const contentType = mime.getType(fullPath) || 'application/octet-stream';
+
+      const uploadParams = {
+        Bucket: bucketName,
+        Key: s3Key,  
+        Body: fileContent,
+        ContentType: contentType,
+      };
+
+      try {
+        const command = new PutObjectCommand(uploadParams);
+        await client.send(command); 
+        console.log(`Successfully uploaded ${fullPath} to ${bucketName}/${s3Key}`);
+      } catch (err) {
+        console.error(`Error uploading ${fullPath}:`, err);
+      }
+    }
+  }
+}
+
+async function deploy(bucket: string): Promise<void>{
+    const listBucketCommand = new ListBucketsCommand()
+
+    let buckets: Bucket[] = []
+    try {
+        const buckets_data  = await client.send(listBucketCommand);
+        buckets = buckets_data.Buckets || []
+      } catch (error) {
+        console.error(error)
+        return
+    } 
+
+    let existing_bucket: Bucket = {}
+    buckets.forEach((buck) => {
+        let splitBucket = buck.Name?.split('-') || []
+        if(splitBucket[1] === bucket){
+            existing_bucket = buck
+        }
+    })
+
+    if(!Object.keys(existing_bucket).length){
+        const randomString = Math.random().toString(36).slice(2, 12)
+        const newBucketName = `ssg-${bucket}-${randomString.toLowerCase()}`
+        const createBucketInput = { 
+            // ACL: "public-read" as BucketCannedACL, 
+            Bucket: newBucketName, 
+          
+            CreateBucketConfiguration: { 
+              LocationConstraint: region as BucketLocationConstraint, 
+            },
+            
+            ObjectLockEnabledForBucket: false,  
+            ObjectOwnership: "BucketOwnerEnforced" as ObjectOwnership,  
+        };
+          
+        const createBucketCommand = new CreateBucketCommand(createBucketInput)
+        console.log(`Creating New Bucket ${newBucketName}`)
+    
+        try {
+            const buckets_data  = await client.send(createBucketCommand);
+            console.log(buckets_data)
+          } catch (error) {
+            console.error(error)
+            return
+        } 
+
+        const publicBucketPolicy = {
+            Version: '2012-10-17',
+            Statement: [
+                {
+                    Effect: 'Allow',
+                    Principal: '*',
+                    Action: 's3:GetObject',
+                    Resource: `arn:aws:s3:::${newBucketName}/*`,
+                },
+            ],
+        };
+
+        // const putBucketPolicyInput = {
+        //     Bucket: newBucketName,
+        //     Policy: JSON.stringify(publicBucketPolicy),
+        // };
+
+        // const putBucketPolicyCommand = new PutBucketPolicyCommand(putBucketPolicyInput)
+        // console.log('Updating Bucket Policy to Be Public')
+        // try {
+        //     const buckets_data  = await client.send(putBucketPolicyCommand);
+        //     console.log(buckets_data)
+        //   } catch (error) {
+        //     console.error(error)
+        //     return
+        // } 
+
+
+        const publicConfig = {
+            Bucket: newBucketName,
+            WebsiteConfiguration: {
+                IndexDocument: {
+                    Suffix: 'index.html',
+                },
+                ErrorDocument: {
+                    Key: '404.html',
+                },
+            },
+        };
+
+        // const makeBucketPublic = new PutBucketWebsiteCommand(publicConfig)
+        // console.log(`Enabling Static Website Hosting ${newBucketName}`)
+        // try {
+        //     const buckets_data  = await client.send(makeBucketPublic);
+        //     console.log(buckets_data)
+        //   } catch (error) {
+        //     console.error(error)
+        //     return
+        // } 
+
+        uploadFolderToS3('../generator/dist', newBucketName)
+    }
+
+    if(existing_bucket.Name){
+        console.log(existing_bucket, 'uploadfiles')
+        uploadFolderToS3('../generator/dist', existing_bucket.Name)
+    }
+}
+
+
+
+deploy('joesroofing')

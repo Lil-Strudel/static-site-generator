@@ -1,0 +1,13 @@
+{
+  "name": "apps-deploy",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.668.0",
+    "mime": "^4.0.4",
+    "typescript": "^5.6.3"
+  }
+}
