@@ -4,9 +4,13 @@ import mdx from "@astrojs/mdx";
 
 import sitemap from "@astrojs/sitemap";
 
+import solidJs from "@astrojs/solid-js";
+
+import tailwind from "@astrojs/tailwind";
+
 // https://astro.build/config
 export default defineConfig({
   output: "static",
   site: "https://example.com",
-  integrations: [mdx(), sitemap()],
+  integrations: [mdx(), sitemap(), solidJs(), tailwind()],
 });

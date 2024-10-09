@@ -8,18 +8,7 @@
         "description": "meta description",
         "title": "1234"
       },
-      "components": [
-        { "path": "Header.astro", "props": {} },
-        {
-          "path": "ContentBlock.astro",
-          "props": { "text": "this is a test" }
-        },
-        {
-          "path": "ContentBlock.astro",
-          "props": { "text": "Content block 2" }
-        },
-        { "path": "Footer.astro", "props": {} }
-      ]
+      "components": [{ "type": "hero", "path": "Hero5.astro", "props": {} }]
     },
     {
       "path": "about-us",
@@ -27,14 +16,7 @@
         "description": "about description",
         "title": "4321"
       },
-      "components": [
-        { "path": "Header.astro", "props": {} },
-        {
-          "path": "ContentBlock.astro",
-          "props": { "text": "Lorem ipsum Domir Alit" }
-        },
-        { "path": "Footer.astro", "props": {} }
-      ]
+      "components": []
     }
   ]
 }

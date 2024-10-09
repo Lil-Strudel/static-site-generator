@@ -1,5 +1,6 @@
+import path from "path";
 import config from "./config.json";
-import { mkdirSync, writeFileSync } from "fs";
+import { mkdirSync, readdirSync, unlinkSync, writeFileSync } from "fs";
 
 const indentSpaceCount = 4;
 
@@ -7,21 +8,41 @@ function ind(num: number, str: string) {
   return " ".repeat(num * indentSpaceCount) + str;
 }
 
-mkdirSync("./dist_pages", { recursive: true });
+type Component = { type: string; path: string };
+
+function getUniqueComponents(arr: Component[]): Component[] {
+  const map = new Map<string, Component>();
+
+  arr.forEach((item) => {
+    const key = `${item.type}:${item.path}`;
+    if (!map.has(key)) {
+      map.set(key, item);
+    }
+  });
+
+  return Array.from(map.values());
+}
+
+const directory = "./dist_pages";
+mkdirSync(directory, { recursive: true });
+const files = readdirSync(directory);
+for (const file of files) {
+  unlinkSync(path.join(directory, file));
+}
 
 for (const page of config.pages) {
   const file = [];
 
   file.push("---");
-  file.push("import BaseHead from '../_components/BaseHead.astro'");
+  file.push("import BaseHead from '../components/BaseHead.astro'");
 
-  const uniqueComponents = new Set<string>();
-  page.components.forEach((component) => {
-    uniqueComponents.add(component.path);
-  });
+  const uniqueComponents = getUniqueComponents(page.components);
   for (const component of uniqueComponents) {
-    // prettier-ignore
-    file.push(`import ${component.split(".")[0]} from '../components/${component}'`);
+    file.push(
+      `import ${component.path.split(".")[0]} from '../blocks/${
+        component.type
+      }/${component.path}'`
+    );
   }
   file.push("---");
   file.push("");
@@ -41,6 +62,7 @@ for (const page of config.pages) {
           propString = propString + `"${value}" `;
           break;
         }
+        case "object":
         case "boolean":
         case "number": {
           propString = propString + `{${value}} `;

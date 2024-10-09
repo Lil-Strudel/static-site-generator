@@ -6,7 +6,8 @@
     "moduleResolution": "Bundler",
     "isolatedModules": true,
     "esModuleInterop": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js"
   }
 }
 
