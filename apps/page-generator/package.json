@@ -1,0 +1,12 @@
+{
+  "name": "apps-page-generator",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "typescript": "^5.6.3"
+  }
+}
+
