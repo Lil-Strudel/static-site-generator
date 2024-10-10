@@ -1,12 +1,5 @@
 name: "Page Generator Action"
 description: "Generates pages and deploys them."
-inputs:
-  bucket-name:
-    description: "The name of the bucket to use."
-    required: true
-  config:
-    description: "Configuration JSON string."
-    required: true
 runs:
   using: "composite"
   steps:
@@ -14,6 +7,4 @@ runs:
       shell: bash
       run: |
         echo "Running page generator..."
-        CONFIG=${{ inputs.config }}
-        BUCKET_NAME=${{ inputs.bucket-name }}
         bash ./scripts/generate-site.sh "$BUCKET_NAME" "$CONFIG"
