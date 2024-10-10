@@ -1,4 +1,19 @@
-import { S3Client, PutBucketPolicyCommand, PutObjectCommand, ListBucketsCommand, CreateBucketCommand, Bucket, BucketLocationConstraint, ObjectOwnership, PutBucketWebsiteCommand, PutPublicAccessBlockCommand } from "@aws-sdk/client-s3";
+import { 
+  S3Client, 
+  PutBucketPolicyCommand, 
+  PutObjectCommand, 
+  ListBucketsCommand, 
+  CreateBucketCommand, 
+  Bucket, 
+  BucketLocationConstraint, 
+  ObjectOwnership, 
+  PutBucketWebsiteCommand, 
+  PutPublicAccessBlockCommand,
+  ListObjectsV2Command,
+  DeleteObjectsCommand,
+  DeleteObjectsCommandInput,
+  ListObjectsV2CommandOutput
+} from "@aws-sdk/client-s3";
 import * as fs from "fs";
 import * as path from "path";
 import mime from 'mime';
@@ -14,6 +29,15 @@ const client = new S3Client({
     },
 }
 );
+
+async function runClientCommand(command){
+  try {
+    await client.send(command); 
+    console.log(`Successfully ran AWS command ${command.name}`);
+  } catch (err) {
+    console.error(`Error running command ${command.name}:`, err);
+  }
+}
 
 
 async function uploadFolderToS3(folderPath: string, bucketName: string, prefix: string = "") {
@@ -46,6 +70,51 @@ async function uploadFolderToS3(folderPath: string, bucketName: string, prefix: 
     }
   }
 }
+
+async function deleteAllObjectsInBucket(bucketName: string) {
+  let isTruncated = true;
+  let continuationToken: string | undefined = undefined;
+
+  try {
+    while (isTruncated) {
+      const listParams = {
+        Bucket: bucketName,
+        ContinuationToken: continuationToken, 
+      };
+
+      const listObjectsCommand = new ListObjectsV2Command(listParams);
+      const listObjectsOutput = await client.send(listObjectsCommand) as ListObjectsV2CommandOutput;
+
+      const objects = listObjectsOutput.Contents;
+
+      if (!objects || objects.length === 0) {
+        console.log('No objects found in the bucket');
+        return;
+      }
+
+      const deleteParams: DeleteObjectsCommandInput = {
+        Bucket: bucketName,
+        Delete: {
+          Objects: objects.map((object) => ({ Key: object.Key! })), 
+        },
+      };
+
+      const deleteObjectsCommand = new DeleteObjectsCommand(deleteParams);
+      const deleteObjectsOutput = await client.send(deleteObjectsCommand);
+
+      console.log('Deleted objects:', deleteObjectsOutput.Deleted);
+
+      isTruncated = listObjectsOutput.IsTruncated || false;
+      continuationToken = listObjectsOutput.NextContinuationToken;
+    }
+
+    console.log(`All objects in bucket "${bucketName}" have been deleted`);
+  } catch (error) {
+    console.error('Error deleting objects:', error);
+  }
+}
+
+
 
 async function deploy(bucket: string): Promise<void>{
 
@@ -167,7 +236,11 @@ async function deploy(bucket: string): Promise<void>{
     }
 
     if(existing_bucket.Name){
-        console.log(existing_bucket, 'uploadfiles')
+        console.log(`Deleting all files in ${existing_bucket.Name} to regenerate page`)
+        deleteAllObjectsInBucket(existing_bucket.Name);
+        
+        
+        console.log(`Regenerating all files in ${existing_bucket.Name}`)
         uploadFolderToS3('../generator/dist', existing_bucket.Name)
     }
 }
