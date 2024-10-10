@@ -1,0 +1,22 @@
+# .github/actions/page-generator/action.yml
+name: "Page Generator Action"
+description: "Generates pages and deploys them."
+inputs:
+  bucket-name:
+    description: "The name of the bucket to use."
+    required: true
+  config:
+    description: "Configuration JSON string."
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Run Page Generator
+      run: |
+        echo "Running page generator..."
+        CONFIG=${{ inputs.config }}
+        BUCKET_NAME=${{ inputs.bucket-name }}
+        bash ./scripts/generate-page.sh "$BUCKET_NAME" "$CONFIG"

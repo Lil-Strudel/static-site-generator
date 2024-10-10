@@ -1,0 +1,23 @@
+name: Page Generator Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      bucket-name:
+        description: "The name of the bucket to use."
+        required: true
+        default: "my-bucket"
+      config:
+        description: "Configuration JSON string."
+        required: true
+        default: '{"key":"value"}'
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Page Generator Action
+        uses: ./.github/actions/page-generator
+        with:
+          bucket-name: ${{ github.event.inputs.bucket-name }}
+          config: ${{ github.event.inputs.config }}
