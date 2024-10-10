@@ -9,8 +9,10 @@ import deleteAllObjectsInBucket from "./s3/deleteAllObjectsInBucket";
 import createBucketWithPublicAccess from "./s3/createBucketWithPublicAccess";
 
 
+const cloudFrontArn = "arn:aws:acm:us-east-1:539247450262:certificate/65a80fa1-5299-4efa-bd8b-50efc2447c1a"
+
 const region = process.env.REGION  || "us-west-2"
-const bucket_name = process.env.BUCKET_NAME || "jaxonstestroofing"
+const bucket_name = process.env.BUCKET_NAME || "jaxonsnohyphen"
 
 const client = new S3Client({
     region: region,
@@ -36,7 +38,10 @@ async function deploy(bucket: string): Promise<void>{
     let existing_bucket: Bucket = {}
     buckets.forEach((buck) => {
         let splitBucket = buck.Name?.split('-') || []
-        if(splitBucket[1] === bucket){
+        const middleElements = splitBucket.slice(1, -1); 
+        const joinedName = middleElements.join('-')
+        
+        if(joinedName === bucket){
             existing_bucket = buck
         }
     })
