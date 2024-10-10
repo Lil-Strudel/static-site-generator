@@ -10,6 +10,7 @@ import createBucketWithPublicAccess from "./s3/createBucketWithPublicAccess";
 
 
 const region = process.env.REGION  || "us-west-2"
+const bucket_name = process.env.BUCKET_NAME || "jaxonstestroofing"
 
 const client = new S3Client({
     region: region,
@@ -58,4 +59,4 @@ async function deploy(bucket: string): Promise<void>{
 
 
 
-deploy('aaronslawncare')
+deploy(bucket_name)
