@@ -1,18 +1,7 @@
 import { 
   S3Client, 
-  PutBucketPolicyCommand, 
-  PutObjectCommand, 
   ListBucketsCommand, 
-  CreateBucketCommand, 
   Bucket, 
-  BucketLocationConstraint, 
-  ObjectOwnership, 
-  PutBucketWebsiteCommand, 
-  PutPublicAccessBlockCommand,
-  ListObjectsV2Command,
-  DeleteObjectsCommand,
-  DeleteObjectsCommandInput,
-  ListObjectsV2CommandOutput
 } from "@aws-sdk/client-s3";
 
 import uploadFolderToS3 from "./s3/uploadFolderToS3";
