@@ -1,0 +1,171 @@
+---
+import { Button } from "../../../components/ui/button";
+
+// Import the pages object
+const pages = [
+  {
+    title: "About",
+    href: "/about-us",
+    subRoutes: [
+      {
+        title: "What we do",
+        href: "/about-us",
+        description: "Lorem ipsom domir asdfjksjdfk sajdkfj sjdkf",
+      },
+      {
+        title: "Accreditations",
+        href: "/about-us",
+        description: "Lorem ipsom domir asdjfjk asjdf j  jas a sdjfjkas djf",
+      },
+      {
+        title: "Our Team",
+        href: "/about-us",
+        description: "Lorem ipsom domir jasd fjajsd j jsd fjasdf jj",
+      },
+      {
+        title: "Blog",
+        href: "/about-us",
+        description: "Lorem ipsom domir asjdfjasd fjs",
+      },
+    ],
+  },
+  {
+    title: "Services",
+    href: "/services",
+    subRoutes: [
+      {
+        title: "Residential Roofing",
+        href: "/services",
+        description: "Lorem ipsom domir",
+      },
+      {
+        title: "Commercial Roofing",
+        href: "/about-us",
+        description: "Lorem ipsom domir",
+      },
+      { title: "Gutters", href: "/about-us", description: "Lorem ipsom domir" },
+      { title: "Sliding", href: "/about-us", description: "Lorem ipsom domir" },
+    ],
+  },
+  {
+    title: "Financing",
+    href: "/financing",
+    subRoutes: [],
+  },
+  {
+    title: "Service Areas",
+    href: "/service-areas",
+    subRoutes: [],
+  },
+];
+
+let isMenuOpen = false;
+---
+<header class="bg-white">
+  <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+    <div class="flex lg:flex-1">
+      <a href="#" class="-m-1.5 p-1.5">
+        <span class="sr-only">Your Company</span>
+        <img class="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
+      </a>
+    </div>
+    <div class="flex lg:hidden">
+      <button
+        type="button"
+        class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+      >
+        <span class="sr-only">Open main menu</span>
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+    </div>
+    <div class="hidden lg:flex lg:gap-x-9">
+      {pages.map((page) => (
+        <div class="relative">
+          <button
+            type="button"
+            class="flex items-center text-sm leading-6 text-gray-900"
+            aria-expanded="false"
+          >
+            {page.title}
+            {page.subRoutes.length > 0 && (
+              <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+              </svg>
+            )}
+          </button>
+          <!-- {page.subRoutes.length > 0 && ( -->
+          <!--   <div class="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5"> -->
+          <!--     <div class="p-4"> -->
+          <!--       {page.subRoutes.map((sub) => ( -->
+          <!--         <div class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"> -->
+          <!--           <div class="flex-auto"> -->
+          <!--             <a href={sub.href} class="block font-semibold text-gray-900"> -->
+          <!--               {sub.title} -->
+          <!--               <span class="absolute inset-0"></span> -->
+          <!--             </a> -->
+          <!--             <p class="mt-1 text-gray-600">{sub.description}</p> -->
+          <!--           </div> -->
+          <!--         </div> -->
+          <!--       ))} -->
+          <!--     </div> -->
+          <!--   </div> -->
+          <!-- )} -->
+        </div>
+      ))}
+    </div>
+    <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+            <Button>Free Inspection</Button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu, show/hide based on menu open state. -->
+  {isMenuOpen && (
+    <div class="lg:hidden" role="dialog" aria-modal="true">
+      <div class="fixed inset-0 z-10"></div>
+      <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <div class="flex items-center justify-between">
+          <a href="#" class="-m-1.5 p-1.5">
+            <span class="sr-only">Your Company</span>
+            <img class="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600" alt="">
+          </a>
+          <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" >
+            <span class="sr-only">Close menu</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="mt-6 flow-root">
+          <div class="-my-6 divide-y divide-gray-500/10">
+            <div class="space-y-2 py-6">
+              {pages.map((page) => (
+                <div class="-mx-3">
+                  <button class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                    {page.title}
+                    {page.subRoutes.length > 0 && (
+                      <svg class="h-5 w-5 flex-none" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                      </svg>
+                    )}
+                  </button>
+                  {page.subRoutes.length > 0 && (
+                    <div class="mt-2 space-y-2">
+                      {page.subRoutes.map((sub) => (
+                        <a href={sub.href} class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                          {sub.title}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )}
+</header>
+

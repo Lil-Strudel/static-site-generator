@@ -1,0 +1,10 @@
+---
+import Dynamic from './Navbar1/Dynamic'
+import Static from './Navbar1/Static.astro'
+
+---
+<Dynamic client:only="solid-js" >
+    <div slot="fallback">
+        <Static />
+    </div>
+</Dynamic>
