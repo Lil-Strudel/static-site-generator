@@ -8,9 +8,11 @@ CONFIG="$2"
 echo "Using bucket: $BUCKET_NAME"
 echo "Using config: $CONFIG"
 
+pnpm install
+
 # Run the TypeScript app for page generation
 echo "Running page generator TypeScript app..."
-npm run build --prefix ./apps/page-generator
+pnpm --filter=apps-page-generator run dev
 
 # Copy generated files to the appropriate directory
 echo "Copying generated files..."
@@ -18,10 +20,10 @@ cp -R ./apps/page-generator/generated/* ./apps/generator/src/
 
 # Build the Astro app
 echo "Building the Astro app..."
-npm run build --prefix ./apps/generator
+pnpm --filter=apps-generator run build 
 
 # Run the deploy script
 echo "Running deploy script..."
-npm run deploy --prefix ./apps/deploy
+pnpm --filter=apps-deploy run deploy
 
 echo "All steps completed successfully!"
