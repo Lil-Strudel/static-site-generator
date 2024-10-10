@@ -33,11 +33,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Write configuration to config.json
+        run: echo '${{ github.event.inputs.config }}' > ./apps/page-generator/src/config.json
+
       - name: Page Generator Action
         uses: ./.github/actions/page-generator
         env:
           ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
           SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
-        with:
-          bucket-name: ${{ github.event.inputs.bucket-name }}
-          config: ${{ github.event.inputs.config }}
+          BUCKET_NAME: ${{ github.event.inputs.bucket-name }}
