@@ -7,7 +7,6 @@ import {
 import {
   CloudFrontClient,
   CreateDistributionCommand,
-  ItemSelection,
   Method,
   MinimumProtocolVersion,
   OriginProtocolPolicy,
@@ -21,9 +20,6 @@ import {
 import uploadFolderToS3 from "./s3/uploadFolderToS3";
 import deleteAllObjectsInBucket from "./s3/deleteAllObjectsInBucket";
 import createBucketWithPublicAccess from "./s3/createBucketWithPublicAccess";
-
-
-const cloudFrontArn = "arn:aws:acm:us-east-1:539247450262:certificate/65a80fa1-5299-4efa-bd8b-50efc2447c1a"
 
 const region = process.env.REGION  || "us-west-2"
 const bucket_name = process.env.BUCKET_NAME || "jaxonslawncare"
