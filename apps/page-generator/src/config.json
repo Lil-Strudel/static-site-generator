@@ -1,5 +1,35 @@
 {
-  "theme": {},
+  "theme": {
+    "background": "#ffffff",
+    "foreground": "#020817",
+
+    "card": "#ffffff",
+    "card-foreground": "#020817",
+
+    "popover": "#ffffff",
+    "popover-foreground": "#020817",
+
+    "primary": "#4299cf",
+    "primary-foreground": "#f8fafc",
+
+    "secondary": "#f1f5f9",
+    "secondary-foreground": "#0f172a",
+
+    "muted": "#f1f5f9",
+    "muted-foreground": "#64748b",
+
+    "accent": "#f1f5f9",
+    "accent-foreground": "#0f172a",
+
+    "destructive": "#ef4444",
+    "destructive-foreground": "#f8fafc",
+
+    "border": "#e2e8f0",
+    "input": "#e2e8f0",
+    "ring": "#020817",
+
+    "radius": "0.5rem"
+  },
   "blogs": [],
   "pages": [
     {
