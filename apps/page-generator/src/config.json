@@ -41,10 +41,10 @@
       "components": [
         {
           "type": "hero",
-          "path": "Hero5.astro",
+          "path": "Hero1.astro",
           "props": {
             "caption": "Caption",
-            "title": "Title",
+            "title": "It Works!!!",
             "description": "Description",
             "button1Text": "Button 1",
             "button2Text": "Button 2"
