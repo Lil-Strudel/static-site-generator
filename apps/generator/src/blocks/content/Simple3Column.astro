@@ -1,0 +1,40 @@
+---
+interface Props {
+  heading: string;
+  title: string;
+  description: string;
+  features: {
+    title: string;
+    description: string;
+  }[];
+}
+
+const { heading, title, description, features } = Astro.props;
+---
+
+<div class="bg-background py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl lg:text-center">
+      <h2 class="text-base font-semibold leading-7 text-primary">{heading}</h2>
+      <p class="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">{title}</p>
+      <p class="mt-6 text-lg leading-8 text-muted-foreground">{description}</p>
+    </div>
+    <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
+      <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
+        {features.map((feature) => (
+          <div class="flex flex-col">
+            <dt class="flex items-center gap-x-3 text-base font-semibold leading-7 text-foreground">
+              <svg class="h-5 w-5 flex-none text-primary" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                <path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z" clip-rule="evenodd" />
+              </svg>
+              {feature.title}
+            </dt>
+            <dd class="mt-4 flex flex-auto flex-col text-base leading-7 text-muted-foreground">
+              <p class="flex-auto">{feature.description}</p>
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+</div>

@@ -5,7 +5,11 @@ import Hero2 from '../blocks/hero/Hero2.astro'
 import Hero3 from '../blocks/hero/Hero3.astro'
 import Hero4 from '../blocks/hero/Hero4.astro'
 import Hero5 from '../blocks/hero/Hero5.astro'
-import Content1 from '../blocks/content/Content1.astro'
+import CenterGrid from "../blocks/content/CenterGrid.astro"
+import ProductScreenshot from '../blocks/content/ProductScreenshot.astro'
+import Simple3Column from "../blocks/content/Simple3Column.astro"
+import Simple from "../blocks/content/Simple.astro"
+import OffsetGrid from "../blocks/content/OffsetGrid.astro"
 ---
 
 <!doctype html>
@@ -19,7 +23,99 @@ import Content1 from '../blocks/content/Content1.astro'
         <Hero3 caption="Caption" title="Title" description='Description' button1Text='Button 1 Text' button2Text='Button 2 Text' />
         <Hero4 caption="Caption" title="Title" description='Description' button1Text='Button 1 Text' button2Text='Button 2 Text' />
         <Hero5 caption="Caption" title="Title" description='Description' button1Text='Button 1 Text' button2Text='Button 2 Text' />
-        <Content1/>
+        <CenterGrid 
+            title="Title",
+            subtitle="SubTitle",
+            description="Description",
+        />
+        <ProductScreenshot
+        heading="Heading"
+        title="Title"
+        description="Description"
+        features={[
+          {
+            title: "Feat 1",
+            description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione."
+          },
+          {
+            title: "Feat 2",
+            description: "Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo."
+          },
+          {
+            title: "Feat 3",
+            description: "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis."
+          }
+        ]}
+        imageSrc="https://tailwindui.com/plus/img/component-images/project-app-screenshot.png"
+        imageAlt="Product screenshot"
+        />
+        <Simple3Column 
+        heading="Heading"
+        title="Title"
+        description="Description"
+        features={[
+          {
+            title: "Feat 1",
+            description: "Commodo nec sagittis tortor mauris sed. Turpis tortor quis scelerisque diam id accumsan nullam tempus. Pulvinar etiam lacus volutpat eu. Phasellus praesent ligula sit faucibus.",
+          },
+          {
+            title: "Feat 2",
+            description: "Pellentesque enim a commodo malesuada turpis eleifend risus. Facilisis donec placerat sapien consequat tempor fermentum nibh.",
+          },
+          {
+            title: "Feat 3",
+            description: "Pellentesque sit elit congue ante nec amet. Dolor aenean curabitur viverra suspendisse iaculis eget. Nec mollis placerat ultricies euismod ut condimentum.",
+          }
+        ]}
+        />
+        <Simple 
+        title="Title"
+        description="Description"
+        features={[
+          {
+            title: "Feat 1",
+            description: "Aut illo quae. Ut et harum ea animi natus. Culpa maiores et sed sint et magnam exercitationem quia. Ullam voluptas nihil vitae dicta molestiae et. Aliquid velit porro vero."
+          },
+          {
+            title: "Feat 2",
+            description: "Mollitia delectus a omnis. Quae velit aliquid. Qui nulla maxime adipisci illo id molestiae. Cumque cum ut minus rerum architecto magnam consequatur. Quia quaerat minima."
+          },
+          {
+            title: "Feat 3",
+            description: "Aut repellendus et officiis dolor possimus. Deserunt velit quasi sunt fuga error labore quia ipsum. Commodi autem voluptatem nam. Quos voluptatem totam."
+          },
+          {
+            title: "Feat 4",
+            description: "Magnam provident veritatis odit. Vitae eligendi repellat non. Eum fugit impedit veritatis ducimus. Non qui aspernatur laudantium modi. Praesentium rerum error deserunt harum."
+          },
+          {
+            title: "Feat 5",
+            description: "Sit minus expedita quam in ullam molestiae dignissimos in harum. Tenetur dolorem iure. Non nesciunt dolorem veniam necessitatibus laboriosam voluptas perspiciatis error."
+          },
+          {
+            title: "Feat",
+            description: "Ipsa in earum deserunt aut. Quos minus aut animi et soluta. Ipsum dicta ut quia eius. Possimus reprehenderit iste aspernatur ut est velit consequatur distinctio."
+          }
+        ]}
+        />
+        <OffsetGrid title="Title" features={[
+                      {
+            title: "Feat 1",
+            description: "Aut illo quae. Ut et harum ea animi natus. Culpa maiores et sed sint et magnam exercitationem quia. Ullam voluptas nihil vitae dicta molestiae et. Aliquid velit porro vero."
+          },
+          {
+            title: "Feat 2",
+            description: "Mollitia delectus a omnis. Quae velit aliquid. Qui nulla maxime adipisci illo id molestiae. Cumque cum ut minus rerum architecto magnam consequatur. Quia quaerat minima."
+          },
+          {
+            title: "Feat 3",
+            description: "Aut repellendus et officiis dolor possimus. Deserunt velit quasi sunt fuga error labore quia ipsum. Commodi autem voluptatem nam. Quos voluptatem totam."
+          },
+          {
+            title: "Feat 4",
+            description: "Magnam provident veritatis odit. Vitae eligendi repellat non. Eum fugit impedit veritatis ducimus. Non qui aspernatur laudantium modi. Praesentium rerum error deserunt harum."
+          },
+        ]} />
     </body>
 <html>
 
