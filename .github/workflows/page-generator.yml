@@ -16,8 +16,11 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Page Generator Action
-        uses: ./.github/actions/page-generator
+        uses: .github/actions/page-generator
         with:
           bucket-name: ${{ github.event.inputs.bucket-name }}
           config: ${{ github.event.inputs.config }}
