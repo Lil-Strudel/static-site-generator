@@ -6,7 +6,7 @@ on:
       bucket-name:
         description: "The name of the bucket to use."
         required: true
-        default: "lil-strudel"
+        default: "lilstrudel"
       config:
         description: "Configuration JSON string."
         required: true
