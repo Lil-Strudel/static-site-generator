@@ -8,8 +8,6 @@ set -e
 # echo "Using bucket: $BUCKET_NAME"
 # echo "Using config: $CONFIG"
 
-pnpm install
-
 # Run the TypeScript app for page generation
 echo "Running page generator TypeScript app..."
 pnpm --filter=apps-page-generator run dev
