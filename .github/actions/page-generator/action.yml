@@ -1,4 +1,3 @@
-# .github/actions/page-generator/action.yml
 name: "Page Generator Action"
 description: "Generates pages and deploys them."
 inputs:
@@ -12,8 +11,9 @@ runs:
   using: "composite"
   steps:
     - name: Run Page Generator
+      shell: bash
       run: |
         echo "Running page generator..."
         CONFIG=${{ inputs.config }}
         BUCKET_NAME=${{ inputs.bucket-name }}
-        bash ./scripts/generate-page.sh "$BUCKET_NAME" "$CONFIG"
+        bash ./scripts/generate-site.sh "$BUCKET_NAME" "$CONFIG"
