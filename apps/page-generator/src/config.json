@@ -9,7 +9,7 @@
     "popover": "#ffffff",
     "popover-foreground": "#020817",
 
-    "primary": "#4299cf",
+    "primary": "#42ffff",
     "primary-foreground": "#f8fafc",
 
     "secondary": "#f1f5f9",
@@ -44,7 +44,7 @@
           "path": "Hero5.astro",
           "props": {
             "caption": "Caption",
-            "title": "Youre mome",
+            "title": "Our Dad",
             "description": "Description",
             "button1Text": "Button 1",
             "button2Text": "Button 2"
