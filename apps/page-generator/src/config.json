@@ -38,7 +38,19 @@
         "description": "meta description",
         "title": "1234"
       },
-      "components": [{ "type": "hero", "path": "Hero5.astro", "props": {} }]
+      "components": [
+        {
+          "type": "hero",
+          "path": "Hero5.astro",
+          "props": {
+            "caption": "Caption",
+            "title": "Title",
+            "description": "Description",
+            "button1Text": "Button 1",
+            "button2Text": "Button 2"
+          }
+        }
+      ]
     },
     {
       "path": "about-us",
