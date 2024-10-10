@@ -2,11 +2,11 @@
 
 set -e
 
-BUCKET_NAME="$1"
-CONFIG="$2"
-
-echo "Using bucket: $BUCKET_NAME"
-echo "Using config: $CONFIG"
+# BUCKET_NAME="$1"
+# CONFIG="$2"
+#
+# echo "Using bucket: $BUCKET_NAME"
+# echo "Using config: $CONFIG"
 
 pnpm install
 
