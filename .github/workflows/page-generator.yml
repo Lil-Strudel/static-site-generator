@@ -34,7 +34,10 @@ jobs:
         run: pnpm install
 
       - name: Write configuration to config.json
-        run: echo '${{ github.event.inputs.config }}' > ./apps/page-generator/src/config.json
+        run: |
+          cat <<EOF > ./apps/page-generator/src/config.json
+          ${{ github.event.inputs.config }}
+          EOF
 
       - name: Page Generator Action
         uses: ./.github/actions/page-generator
