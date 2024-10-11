@@ -1,5 +1,8 @@
 ---
 import BaseHead from '../components/BaseHead.astro'
+import Navbar1 from '../blocks/navbar/Navbar1.astro'
+import ${values[1]} from '../blocks/hero/${values[1]}'
+import Simple3Column from '../blocks/simple3Column/Simple3Column.astro'
 ---
 
 <!doctype html>
@@ -8,5 +11,8 @@ import BaseHead from '../components/BaseHead.astro'
         <BaseHead title="4321" description="about description" />
     </head>
     <body>
+        <Navbar1 />
+        <${values[1]} caption="${values[2]}" title="${values[3]}" description="${values[4]}" button1Text="${values[5]}" button2Text="${values[6]}" />
+        <Simple3Column heading="Heading" title="Title" description="Description" features={[[{"title":"Feat 1","description":"Commodo nec sagittis tortor mauris sed. Turpis tortor quis scelerisque diam id accumsan nullam tempus. Pulvinar etiam lacus volutpat eu. Phasellus praesent ligula sit faucibus."},{"title":"Feat 2","description":"Pellentesque enim a commodo malesuada turpis eleifend risus. Facilisis donec placerat sapien consequat tempor fermentum nibh."},{"title":"Feat 3","description":"Pellentesque sit elit congue ante nec amet. Dolor aenean curabitur viverra suspendisse iaculis eget. Nec mollis placerat ultricies euismod ut condimentum."}]]} />
     </body>
 <html>

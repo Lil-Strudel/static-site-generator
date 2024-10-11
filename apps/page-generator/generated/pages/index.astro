@@ -1,6 +1,8 @@
 ---
 import BaseHead from '../components/BaseHead.astro'
-import Hero5 from '../blocks/hero/Hero5.astro'
+import Navbar1 from '../blocks/navbar/Navbar1.astro'
+import ${values[1]} from '../blocks/hero/${values[1]}'
+import ProductScreenshot from '../blocks/productScreenshot/ProductScreenshot.astro'
 ---
 
 <!doctype html>
@@ -9,6 +11,8 @@ import Hero5 from '../blocks/hero/Hero5.astro'
         <BaseHead title="1234" description="meta description" />
     </head>
     <body>
-        <Hero5 caption="Caption" title="Title" description="Description" button1Text="Button 1" button2Text="Button 2" />
+        <Navbar1 />
+        <${values[1]} caption="${values[2]}" title="${values[3]}" description="${values[4]}" button1Text="${values[5]}" button2Text="${values[6]}" />
+        <ProductScreenshot heading="Heading" title="Title" description="Description" features={[[{"title":"Feat 1","description":"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione."},{"title":"Feat 2","description":"Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo."},{"title":"Feat 3","description":"Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis."}]]} imageSrc="https://tailwindui.com/plus/img/component-images/project-app-screenshot.png" imageAlt="Product screenshot" />
     </body>
 <html>

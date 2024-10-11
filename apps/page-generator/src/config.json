@@ -9,7 +9,7 @@
     "popover": "#ffffff",
     "popover-foreground": "#020817",
 
-    "primary": "#52b36f",
+    "primary": "#ff00ff",
     "primary-foreground": "#f8fafc",
 
     "secondary": "#f1f5f9",
@@ -30,7 +30,6 @@
 
     "radius": "0.5rem"
   },
-  "blogs": [],
   "pages": [
     {
       "path": "index",
@@ -40,14 +39,44 @@
       },
       "components": [
         {
+          "type": "navbar",
+          "path": "Navbar1.astro",
+          "props": {}
+        },
+        {
           "type": "hero",
-          "path": "Hero5.astro",
+          "path": "${values[1]}",
           "props": {
-            "caption": "Caption",
-            "title": "Our Dad",
+            "caption": "${values[2]}",
+            "title": "${values[3]}",
+            "description": "${values[4]}",
+            "button1Text": "${values[5]}",
+            "button2Text": "${values[6]}"
+          }
+        },
+        {
+          "type": "productScreenshot",
+          "path": "ProductScreenshot.astro",
+          "props": {
+            "heading": "Heading",
+            "title": "Title",
             "description": "Description",
-            "button1Text": "Button 1",
-            "button2Text": "Button 2"
+            "features": [
+              {
+                "title": "Feat 1",
+                "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione."
+              },
+              {
+                "title": "Feat 2",
+                "description": "Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo."
+              },
+              {
+                "title": "Feat 3",
+                "description": "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis."
+              }
+            ],
+            "imageSrc": "https://tailwindui.com/plus/img/component-images/project-app-screenshot.png",
+            "imageAlt": "Product screenshot"
           }
         }
       ]
@@ -58,7 +87,47 @@
         "description": "about description",
         "title": "4321"
       },
-      "components": []
+      "components": [
+        {
+          "type": "navbar",
+          "path": "Navbar1.astro",
+          "props": {}
+        },
+        {
+          "type": "hero",
+          "path": "${values[1]}",
+          "props": {
+            "caption": "${values[2]}",
+            "title": "${values[3]}",
+            "description": "${values[4]}",
+            "button1Text": "${values[5]}",
+            "button2Text": "${values[6]}"
+          }
+        },
+        {
+          "type": "simple3Column",
+          "path": "Simple3Column.astro",
+          "props": {
+            "heading": "Heading",
+            "title": "Title",
+            "description": "Description",
+            "features": [
+              {
+                "title": "Feat 1",
+                "description": "Commodo nec sagittis tortor mauris sed. Turpis tortor quis scelerisque diam id accumsan nullam tempus. Pulvinar etiam lacus volutpat eu. Phasellus praesent ligula sit faucibus."
+              },
+              {
+                "title": "Feat 2",
+                "description": "Pellentesque enim a commodo malesuada turpis eleifend risus. Facilisis donec placerat sapien consequat tempor fermentum nibh."
+              },
+              {
+                "title": "Feat 3",
+                "description": "Pellentesque sit elit congue ante nec amet. Dolor aenean curabitur viverra suspendisse iaculis eget. Nec mollis placerat ultricies euismod ut condimentum."
+              }
+            ]
+          }
+        }
+      ]
     }
   ]
 }

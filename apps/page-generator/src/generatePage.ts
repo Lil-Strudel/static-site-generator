@@ -35,7 +35,10 @@ export function generatePage(page: (typeof config.pages)[number]) {
           propString = propString + `"${value}" `;
           break;
         }
-        case "object":
+        case "object": {
+          propString = propString + `{${JSON.stringify(value)}} `;
+          break;
+        }
         case "boolean":
         case "number": {
           propString = propString + `{${value}} `;
