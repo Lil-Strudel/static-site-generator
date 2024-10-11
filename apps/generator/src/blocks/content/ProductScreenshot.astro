@@ -26,7 +26,7 @@ const { heading, title, description, features, imageSrc, imageAlt } = Astro.prop
           <p class="mt-6 text-lg leading-8 text-muted-foreground">{description}</p>
           <dl class="mt-10 max-w-xl space-y-8 text-base leading-7 text-muted-foreground lg:max-w-none">
             {features.map((feature) => (
-              <div class="relative pl-9" key={feature.title}>
+              <div class="relative pl-9">
                 <dt class="inline font-semibold text-foreground">
                   <svg class="absolute left-1 top-1 h-5 w-5 text-primary" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
                     {/* Add SVG path here based on feature */}
