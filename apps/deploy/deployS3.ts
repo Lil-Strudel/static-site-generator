@@ -123,11 +123,11 @@ async function deploy(bucket: string): Promise<void>{
         await uploadFolderToS3('../generator/dist', newBucketName, "", client)
         const s3Url = `http://${newBucketName}.s3-website-us-west-2.amazonaws.com`
 
-        console.log('Creating cloudfront distribution')
-        const distribution = await createCloudFrontDistribution(s3Url)
-        if(distribution){
-          console.log(`cloudwatch domain name ${distribution.Distribution?.DomainName}`)
-        }
+        // console.log('Creating cloudfront distribution')
+        // const distribution = await createCloudFrontDistribution(s3Url)
+        // if(distribution){
+        //   console.log(`cloudwatch domain name ${distribution.Distribution?.DomainName}`)
+        // }
     }
 
     if(existing_bucket.Name){
